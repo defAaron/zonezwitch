@@ -2,8 +2,6 @@
 //  TimeZoneSliderView.swift
 //  ZoneZwitch
 //
-//  Main view with two synchronized time zone sliders
-//
 
 import SwiftUI
 
@@ -12,7 +10,6 @@ struct TimeZoneSliderView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            // EST Slider
             VStack(spacing: 8) {
                 Text(timeZoneManager.estTimeString)
                     .font(.system(size: 14, weight: .medium))
@@ -30,7 +27,6 @@ struct TimeZoneSliderView: View {
             .padding(.horizontal, 20)
             .padding(.top, 16)
             
-            // IST Slider
             VStack(spacing: 8) {
                 Text(timeZoneManager.istTimeString)
                     .font(.system(size: 14, weight: .medium))
@@ -47,7 +43,6 @@ struct TimeZoneSliderView: View {
             }
             .padding(.horizontal, 20)
             
-            // Now button
             Button(action: {
                 timeZoneManager.updateToCurrentTime()
             }) {
@@ -76,22 +71,19 @@ struct TimeZoneSlider: View {
     @State private var isDragging = false
     @State private var lastValue: Double = 0
     
-    private let totalMinutes = 24.0 * 60.0 // 1440 minutes in a day
+    private let totalMinutes = 24.0 * 60.0
     
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
-                // Background track
                 RoundedRectangle(cornerRadius: 4)
                     .fill(Color.gray.opacity(0.2))
                     .frame(height: 8)
                 
-                // Active track
                 RoundedRectangle(cornerRadius: 4)
                     .fill(color.opacity(0.3))
                     .frame(width: CGFloat(value / totalMinutes) * geometry.size.width, height: 8)
                 
-                // Tick marks
                 HStack(spacing: 0) {
                     ForEach(0..<25) { hour in
                         Rectangle()
@@ -104,7 +96,6 @@ struct TimeZoneSlider: View {
                     }
                 }
                 
-                // Slider handle
                 Circle()
                     .fill(color)
                     .frame(width: 20, height: 20)
@@ -119,10 +110,8 @@ struct TimeZoneSlider: View {
                                 }
                                 
                                 let newValue = max(0, min(totalMinutes, Double(gesture.location.x / geometry.size.width) * totalMinutes))
-                                // Snap to 5-minute increments
                                 let snappedValue = round(newValue / 5.0) * 5.0
                                 
-                                // Only update if value changed (to avoid excessive updates)
                                 if abs(snappedValue - value) >= 5.0 {
                                     value = snappedValue
                                     onValueChanged()
@@ -130,7 +119,6 @@ struct TimeZoneSlider: View {
                             }
                             .onEnded { _ in
                                 isDragging = false
-                                // Final update if needed
                                 if abs(value - lastValue) >= 5.0 {
                                     onValueChanged()
                                 }

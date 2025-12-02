@@ -2,8 +2,6 @@
 //  ZoneZwitchApp.swift
 //  ZoneZwitch
 //
-//  Created for macOS menu bar time zone slider app
-//
 
 import SwiftUI
 
@@ -23,8 +21,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusBarController = StatusBarController()
-        
-        // Hide dock icon
         NSApp.setActivationPolicy(.accessory)
     }
     

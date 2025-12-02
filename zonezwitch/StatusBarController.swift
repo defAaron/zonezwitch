@@ -2,8 +2,6 @@
 //  StatusBarController.swift
 //  ZoneZwitch
 //
-//  Manages the menu bar icon and popover
-//
 
 import AppKit
 import SwiftUI
@@ -17,12 +15,10 @@ class StatusBarController {
     }
     
     private func setupStatusBar() {
-        // Create status bar item
         statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         guard let statusBarItem = statusBarItem else { return }
         
-        // Set icon (using SF Symbol or custom icon)
         if let button = statusBarItem.button {
             button.image = NSImage(systemSymbolName: "clock", accessibilityDescription: "ZoneZwitch")
             button.image?.isTemplate = true
@@ -30,7 +26,6 @@ class StatusBarController {
             button.target = self
         }
         
-        // Create popover
         popover = NSPopover()
         popover?.contentSize = NSSize(width: 350, height: 220)
         popover?.behavior = .transient
