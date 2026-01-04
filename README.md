@@ -89,10 +89,8 @@ zonezwitch/
 
 ## Future Enhancements
 
-- "Now" button to jump to current time
 - Additional time zones
 - AM/PM or 24-hour format toggle
-- Meeting scheduler mode
 
 ## License
 
